@@ -30,7 +30,7 @@
 
 .zoom-control i {
   font-size : 40px;
-  color : var(--contents-bg-color)
+  color : var(--main-bg-color)
 }
 
 .zoom-control input {
@@ -47,7 +47,7 @@
 
 .btn-group i {
   font-size : 40px;
-  color : var(--contents-bg-color);
+  color : var(--main-bg-color);
   margin-right : 15px;
 }
 
