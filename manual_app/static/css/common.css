@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --contents-bg-color : #fff;
+  --second-bg-color : #326ef0;
+  --nav-bg-color : #F0F3FA;
+  --text-color : #333333;
+  --main-btn-color : #1b9bff;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.6rem;
+  background: var(--main-btn-color);
+  border-radius: 4rem;
+  box-shadow: 0 0 1rem var(--main-btn-color);
+  font-size: 1rem;
+  color: var(--contents-bg-color);
+  letter-spacing: .1rem;
+  font-weight: 600;
+  transition: .3s ease;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+button {
+  /* background-color: transparent; */
+  background: none;
+  border: none;
+  cursor: pointer;
+}
