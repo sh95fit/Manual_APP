@@ -10,18 +10,22 @@
 }
 
 .btn {
-  display: inline-block;
-  padding: 0.7rem 1.6rem;
+  /* display: inline-block; */
+  padding: 0.3rem 1.6rem;
   /* background: var(--main-btn-color); */
-  background: var(--second-btn-color);
-  border-radius: 4rem;
+  /* background: var(--second-btn-color); */
+  background-color: var(--main-bg-color);
+  border-radius: 0.3rem;
   /* box-shadow: 0 0 1rem var(--main-btn-color); */
-  box-shadow: 0 0 1rem var(--second-btn-color);
+  /* box-shadow: 0 0 1rem var(--second-btn-color); */
+  /* box-shadow: 0 0 1rem var(--main-bg-color); */
+  border: 2px solid var(--second-bg-color);
   font-size: 1rem;
-  color: var(--main-bg-color);
+  /* color: var(--main-bg-color); */
+  color: var(--second-bg-color);
   letter-spacing: .1rem;
   font-weight: 600;
-  transition: .3s ease;
+  /* transition: .3s ease; */
 }
 
 input {

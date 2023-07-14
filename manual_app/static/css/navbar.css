@@ -51,6 +51,10 @@
   margin-right : 15px;
 }
 
-.download-btn {
+div .download {
+  display: inline-block;
+  padding: 3px;
+  background-color: var(--main-bg-color);
+  border-radius: 0.3rem;
   margin-right : 20px;
 }
