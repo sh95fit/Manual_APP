@@ -30,7 +30,12 @@
 
 .zoom-control i {
   font-size : 30px;
-  color : var(--main-bg-color)
+  color : var(--main-bg-color);
+  transition: transform 0.1s ease;
+}
+
+.zoom-control i:hover {
+  transform: scale(1.1);
 }
 
 .zoom-control input {
@@ -48,7 +53,12 @@
 .btn-group i {
   font-size : 40px;
   color : var(--main-bg-color);
-  margin-right : 15px;
+  margin-right : 10px;
+  transition: transform 0.1s ease;
+}
+
+.btn-group i:hover {
+  transform: scale(1.1);
 }
 
 div .download {
@@ -57,4 +67,10 @@ div .download {
   background-color: var(--main-bg-color);
   border-radius: 0.3rem;
   margin-right : 20px;
+  margin-left : 5px;
+  transition: transform 0.1s ease;
+}
+
+div .download:hover {
+  transform: scale(1.05);
 }

@@ -9,6 +9,35 @@
   --second-btn-color : #0B48C1;  /*#0D4FD3; #1F5AAD; #0068B8; #1D4BAF; #225AD3;  #2156C9; */
 }
 
+body {
+  margin: 0;
+}
+
+.box-navbar {
+  display : flex;
+  width : 100%;
+  height : 70px;
+  justify-content : space-between;
+  align-items: center;
+  background-color: var(--second-bg-color);
+}
+
+.box-sidebar {
+  background-color: #dee0e7;
+  width : 270px;
+  flex-shrink: 0;
+}
+
+.box-contents {
+  background-color: #333333;
+  /* width: 100%; */
+  flex-grow: 1;
+}
+
+.box {
+  display: flex;
+}
+
 .btn {
   /* display: inline-block; */
   padding: 0.3rem 1.6rem;

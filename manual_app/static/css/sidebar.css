@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+nav.manual_list ul, li {
+  list-style-type: none;
+}
+
+nav.manual_list a {
+  text-decoration: none;
+  color: inherit;
+}
