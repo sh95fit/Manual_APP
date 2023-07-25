@@ -14,6 +14,7 @@
   margin-left : 20px;
 }
 
+/*
 .zoom-control {
   display : flex;
   align-items: center;
@@ -26,7 +27,6 @@
 .zoom-control #zoom-out {
   margin-left : 15px;
 }
-
 
 .zoom-control i {
   font-size : 30px;
@@ -44,6 +44,63 @@
   text-align: center;
   font-weight: 600;
 }
+*/
+
+.search-box {
+  display : flex;
+  border-radius: 30px;
+  box-shadow: 0 3px 8px 0px rgba(0, 0, 0, 0.5);
+  transition: transform 0.1s ease;
+}
+
+.search-box:focus-within {
+  /* border-color: #D7E3FA; */
+  /* box-shadow: 0 0 3px 2px #D7E3FA; */
+  border-color: #B3C8F0;
+  box-shadow: 0 0 3px 2px #B3C8F0;
+}
+
+.search-box:hover {
+  transform: scale(1.01);
+  /* box-shadow: 0 0 3px 2px #D7E3FA; */
+  box-shadow: 0 0 3px 2px #B3C8F0;
+}
+
+
+.search-box .search-input {
+  flex : 1;
+  padding : 6px; 
+  width : 20rem;
+  margin : 0;
+  border : none;
+  border-radius : 30px 0 0 30px;
+  padding-left: 20px;
+}
+
+.search-box .search-input:focus {
+  outline : none;
+}
+
+/*
+.search-box .search-input::placeholder {
+  text-indent : 10px;
+}
+*/
+
+.search-box .bx-search {
+  padding : 10px 10px;
+  margin : 0;
+  border: none;
+  /* background-color: var(--main-btn-color); */
+  background-color: #1B5EDA;
+  border-radius: 0 30px 30px 0;
+  cursor : pointer;
+  font-size : 16px;
+  color : white;
+  font-weight : bold;
+  
+}
+
 
 .btn-group {
   display : flex;
@@ -55,6 +112,7 @@
   color : var(--main-bg-color);
   margin-right : 10px;
   transition: transform 0.1s ease;
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
 }
 
 .btn-group i:hover {
@@ -69,6 +127,7 @@ div .download {
   margin-right : 20px;
   margin-left : 5px;
   transition: transform 0.1s ease;
+  box-shadow: 0 3px 8px 0px rgba(0, 0, 0, 0.5);
 }
 
 div .download:hover {
