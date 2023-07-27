@@ -1,49 +1,52 @@
 <head>
   <link rel="stylesheet" href="../static/css/sidebar.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
   <div class="manual_list">
-    <ul>
+    <ul class="parent-items">
       <li>
         <a href="#">HTML1</a>
-        <ul>
-          <li><a href="#">위치별 표시1</a></li>
-          <li><a href="#">위치별 표시2</a></li>
-          <li><a href="#">위치별 표시3</a></li>
+        <ul class="child-items" onclick="toggleChildren(event)">
+          <li><a href="#">위치별 표시1-1</a></li>
+          <li><a href="#">위치별 표시1-2</a></li>
+          <li><a href="#">위치별 표시1-3</a></li>
         </ul>
       </li>
       <li>
         <a href="#">HTML2</a>
-        <ul>
-          <li><a href="#">위치별 표시1</a></li>
-          <li><a href="#">위치별 표시2</a></li>
-          <li><a href="#">위치별 표시3</a></li>
+        <ul class="child-items" onclick="toggleChildren(event)">
+          <li><a href="#">위치별 표시2-1</a></li>
+          <li><a href="#">위치별 표시2-2</a></li>
+          <li><a href="#">위치별 표시2-3</a></li>
         </ul>
       </li>
       <li>
         <a href="#">HTML3</a>
-        <ul>
-          <li><a href="#">위치별 표시1</a></li>
-          <li><a href="#">위치별 표시2</a></li>
-          <li><a href="#">위치별 표시3</a></li>
+        <ul class="child-items" onclick="toggleChildren(event)">
+          <li><a href="#">위치별 표시3-1</a></li>
+          <li><a href="#">위치별 표시3-2</a></li>
+          <li><a href="#">위치별 표시3-3</a></li>
         </ul>
       </li>
       <li>
         <a href="#">HTML4</a>
-        <ul>
-          <li><a href="#">위치별 표시1</a></li>
-          <li><a href="#">위치별 표시2</a></li>
-          <li><a href="#">위치별 표시3</a></li>
+        <ul class="child-items" onclick="toggleChildren(event)">
+          <li><a href="#">위치별 표시4-1</a></li>
+          <li><a href="#">위치별 표시4-2</a></li>
+          <li><a href="#">위치별 표시4-3</a></li>
         </ul>
       </li>
       <li>
         <a href="#">HTML5</a>
-        <ul>
-          <li><a href="#">위치별 표시1</a></li>
-          <li><a href="#">위치별 표시2</a></li>
-          <li><a href="#">위치별 표시3</a></li>
+        <ul class="child-items" onclick="toggleChildren(event)">
+          <li><a href="#">위치별 표시5-1</a></li>
+          <li><a href="#">위치별 표시5-2</a></li>
+          <li><a href="#">위치별 표시5-3</a></li>
         </ul>
       </li>
     </ul>
   </div>
+
+  <script src="../static/js/sidebar.js"></script>
 </body>

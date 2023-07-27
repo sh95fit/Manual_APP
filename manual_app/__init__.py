@@ -1,4 +1,6 @@
 from flask import Flask, render_template
+from manual_app.routes import main_route
+
 
 def create_app() :
   print('run: create_app()')
@@ -8,8 +10,9 @@ def create_app() :
     app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 1
     app.config['TEMPLATES_AUTO_RELOAD'] = True
 
-  @app.route('/')
-  def index() :
-    return render_template('index.html')
+  '''ROUTES INIT'''
+  app.register_blueprint(main_route.bp)
+
+
 
   return app

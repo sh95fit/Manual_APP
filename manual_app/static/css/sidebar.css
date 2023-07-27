@@ -3,11 +3,32 @@
   padding: 0;
 }
 
-nav.manual_list ul, li {
+.manual_list ul, li {
   list-style-type: none;
 }
 
-nav.manual_list a {
+.manual_list a {
   text-decoration: none;
   color: inherit;
+}
+
+.manual_list .parent-items > li {
+  display: block;
+  padding : 8px;
+  margin-left: 20px;
+  font-size : 1.1rem;
+  font-weight: 700;
+}
+
+.manual_list .parent-items > li > .child-items {
+  font-size : 1rem;
+  font-weight : 500;
+}
+
+.manual_list .parent-items > li > .child-items > li {
+  padding : 6px;
+}
+
+.manual_list .parent-items > li > .child-items {
+  display : none;
 }
