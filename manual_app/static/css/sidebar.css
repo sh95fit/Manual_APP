@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+.manual_list {
+  margin-top: 15px;
+}
+
 .manual_list ul, li {
   list-style-type: none;
 }

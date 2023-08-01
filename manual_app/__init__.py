@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from manual_app.routes import main_route
+from manual_app.routes import main_route, contents_route
 
 
 def create_app() :
@@ -12,6 +12,7 @@ def create_app() :
 
   '''ROUTES INIT'''
   app.register_blueprint(main_route.bp)
+  app.register_blueprint(contents_route.bp)
 
 
 

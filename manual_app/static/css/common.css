@@ -34,7 +34,7 @@ body {
 
 .box-contents {
   background-color: #fff;
-  margin: 80px 10px 10px 310px;
+  margin: 85px 10px 10px 320px;
   /* width: 100%; */
   flex-grow: 1;
 }
