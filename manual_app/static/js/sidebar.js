@@ -61,13 +61,16 @@ $(document).ready(function() {
     const childItems = clickedItem.find('.child-items');
 
     if (!childItems.is(':visible')) {
-      $('.parent-items > li > .child-items').hide();
-      clickedItem.addClass('active');
-    } else {
-      clickedItem.removeClass('active');
+      $('.parent-items > li.active > .child-items').hide();
+      $('.parent-items > li.active').removeClass('active');
     }
 
     childItems.toggle();
+
+    if (childItems.is(':visible')) {
+      clickedItem.addClass('active');
+    }
+
     fetchContent($(this).attr('href'));
   });
 

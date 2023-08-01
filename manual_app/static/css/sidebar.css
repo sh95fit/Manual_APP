@@ -34,6 +34,24 @@
   display: block;
 }
 
+.manual_list .parent-items > li > a  {
+  background-color: transparent;
+}
+
+.manual_list .parent-items > li.active > a {
+  width: calc(100% + 20px);
+  margin-left : -20px;
+  text-indent : 20px;
+  padding-top : 5px;
+  padding-bottom : 5px;
+  background-color: #61677A;
+  color: white;
+  white-space: nowrap;
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
 .manual_list .parent-items > li > .child-items > li {
   padding : 6px;
 }
