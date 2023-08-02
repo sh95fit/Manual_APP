@@ -24,7 +24,8 @@ body {
 }
 
 .box-sidebar {
-  background-color: #D8D9DA;
+  /* background-color: #D8D9DA; */
+  background-color: #d5e2f7;
   margin-top :70px;
   width : 300px;
   height : 100%;
