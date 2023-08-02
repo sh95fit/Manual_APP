@@ -5,6 +5,7 @@ from manual_app.routes import main_route, contents_route
 def create_app() :
   print('run: create_app()')
   app = Flask(__name__)
+  app.secret_key = 'TEST'
 
   if app.config['DEBUG'] == True :
     app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 1

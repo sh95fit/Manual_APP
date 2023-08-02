@@ -73,6 +73,7 @@
 
 .manual_list .parent-items > li > .child-items > li {
   padding : 6px;
+  margin-left : 20px;
   font-weight : 500;
 }
 
