@@ -73,10 +73,23 @@
 
 .manual_list .parent-items > li > .child-items > li {
   padding : 6px;
-  margin-left : 20px;
+  /* margin-left : 20px; */
   font-weight : 500;
 }
 
 /* .manual_list .parent-items > li > .child-items {
   display : none;
 } */
+
+div > ul > li.active > ul > li:last-child.active {
+  background-color: #EEF3FC;
+  border-radius: 0px 0px 5px 5px;
+}
+
+div > ul > li.active > ul > li.active {
+  background-color: #EEF3FC;
+}
+
+div > ul > li.active > ul > li.active > a {
+  font-weight: 800;
+}

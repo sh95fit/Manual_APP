@@ -3,14 +3,14 @@
 // 스크롤 위치로 이동
 scrollToSavedPosition();
 
-// F5 키 누를 때 새로고침
-window.addEventListener('keydown', function(event) {
-  // F5 키를 누를 때에만 새로고침
-  if (event.keyCode === 116) {
-    event.preventDefault();
-    location.reload();
-  }
-});
+// // F5 키 누를 때 새로고침
+// window.addEventListener('keydown', function(event) {
+//   // F5 키를 누를 때에만 새로고침
+//   if (event.keyCode === 116) {
+//     event.preventDefault();
+//     location.reload();
+//   }
+// });
 
 // 새로고침될 때 스크롤 위치로 이동하는 함수
 function scrollToSavedPosition() {
@@ -106,6 +106,12 @@ logoLink.addEventListener("click", handleLogoLinkClick);
 //     window.location.href = "/"; // 홈 페이지로 이동
 //   });
 // }
+
+
+
+
+
+
 
 
 

@@ -57,3 +57,16 @@ function fetchContent(contentUrl) {
 //   });
 // });
 
+
+
+function toggleChildren(event) {
+  event.stopPropagation(); // 이벤트 전파 방지 (상위 요소로의 전파 차단)
+  const target = event.target; // 클릭된 요소 가져오기
+  if (target.tagName === "A") {
+    // 클릭된 요소가 앵커 태그인지 확인
+    const sectionId = target.getAttribute("href"); // 앵커 태그의 href 속성 가져오기 (예: "#section1-1")
+    $(".child-items li").removeClass("active"); // 모든 하위 li 요소의 활성화 클래스 제거
+    $(target).parent().addClass("active"); // 클릭한 앵커 태그의 부모 li 요소에 활성화 클래스 추가
+  }
+}
+
