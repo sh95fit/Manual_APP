@@ -11,7 +11,6 @@
   text-align: center;
 }
 
-
 .manual_list {
   margin-top: 5px;
 }
@@ -50,6 +49,7 @@
 
 .manual_list .parent-items > li > a  {
   background-color: transparent;
+  margin-right: 100px;
 }
 
 .manual_list .parent-items > li.active > a {
@@ -76,10 +76,6 @@
   /* margin-left : 20px; */
   font-weight : 500;
 }
-
-/* .manual_list .parent-items > li > .child-items {
-  display : none;
-} */
 
 div > ul > li.active > ul > li:last-child.active {
   background-color: #EEF3FC;
