@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from manual_app.routes import main_route, contents_route, generate_pdf_route
+from manual_app.routes import generate_pdf_multi_route, generate_pdf_private_route, main_route, contents_route
 
 
 def create_app() :
@@ -14,7 +14,8 @@ def create_app() :
   '''ROUTES INIT'''
   app.register_blueprint(main_route.bp)
   app.register_blueprint(contents_route.bp)
-  app.register_blueprint(generate_pdf_route.bp)
+  app.register_blueprint(generate_pdf_private_route.bp)
+  app.register_blueprint(generate_pdf_multi_route.bp)
 
 
   return app

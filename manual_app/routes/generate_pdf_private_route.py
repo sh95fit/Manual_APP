@@ -5,13 +5,14 @@ import os
 import uuid
 import tempfile
 
-NAME = "generate_pdf"
+NAME = "generate_private_pdf"
 
-bp = Blueprint(NAME, __name__, url_prefix='/generate_pdf')
-
+bp = Blueprint(NAME, __name__, url_prefix='/generate_private_pdf')
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
+
+# 파일별 페이지 분리가 필요한 경우
 page_list= [
   os.path.join(parent_dir, 'templates', 'contents', 'content1.html'),
   os.path.join(parent_dir, 'templates', 'contents', 'content2.html'),
@@ -28,24 +29,9 @@ def generate_pdf() :
     "enable-local-file-access": True,
   }
 
-  pdf_filename = "more_user_manual.pdf"
-
-# pdf_path = os.path.join(parent_dir, 'static', pdf_filename)
-
-  # uuid를 활용한 중복 제거 (하지만 삭제 시 문제 잔존)
-  # unique_filename = str(uuid.uuid4()) + ".pdf"
-  # pdf_path = os.path.join(parent_dir, 'static', unique_filename)
-
   # Create a temporary file and get its path
   with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as temp_file:
       pdf_path = temp_file.name
-
-
-  if os.path.exists(pdf_path) :
-    try :
-      os.remove(pdf_path)
-    except Exception as e :
-      print(f"Error while deleting existing PDF : {e}")
 
   config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
 
@@ -53,10 +39,11 @@ def generate_pdf() :
 
   @after_this_request
   def remove_pdf(response) :
-    try :
-      os.remove(pdf_path)
-    except Exception as e :
-      print(f"Error while deleting PDF : {e}")
+    if os.path.exists(pdf_path) :
+      try :
+        os.remove(pdf_path)
+      except Exception as e :
+        print(f"Error while deleting PDF : {e}")
     return response
 
   with open(pdf_path, 'rb') as f:
