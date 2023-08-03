@@ -9,8 +9,8 @@ document.getElementsByClassName("download-btn")[0].addEventListener("click", ope
 // 다운로드 버튼을 클릭하면 서버로 /generate_pdf 엔드포인트에 요청을 보냄
 document.querySelector(".pdf-btn").addEventListener("click", function () {
   // 서버로 요청 보내기
-  // fetch("/generate_private_pdf")
-  fetch("/generate_multi_pdf")
+  fetch("/generate_private_pdf")
+  // fetch("/generate_multi_pdf")
     .then((response) => {
       // 응답의 내용을 blob 형태로 가져오기
       return response.blob();
@@ -39,3 +39,25 @@ document.querySelector(".pdf-btn").addEventListener("click", function () {
       console.error("Error fetching PDF:", error);
     });
 });
+
+
+document.querySelector(".printer-btn").addEventListener("click", function () {
+  fetch("/generate_private_pdf")
+  .then((response) => {
+    return response.blob();
+  })
+  .then((blob) => {
+    const url = URL.createObjectURL(blob);
+
+    const newWindow = window.open(url);
+
+    newWindow.onload = function () {
+      newWindow.print();
+
+      URL.revokeObjectURL(url);
+    };
+  })
+  .catch((error) => {
+    console.error("Error generating PDF : ", error);
+  })
+})
