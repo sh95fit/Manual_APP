@@ -1,3 +1,5 @@
+// 구글 플레이 다운로드 링크 연결
+
 function openDownloadLink() {
   const targetURL = "https://play.google.com/store/apps/details?id=kr.co.itsmore.gsm.and.app&hl=ko-KR";
   window.open(targetURL, "_blank");
@@ -5,6 +7,10 @@ function openDownloadLink() {
 
 document.getElementsByClassName("download-btn")[0].addEventListener("click", openDownloadLink);
 
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// pdf 파일 다운로드
 
 // 다운로드 버튼을 클릭하면 서버로 /generate_pdf 엔드포인트에 요청을 보냄
 document.querySelector(".pdf-btn").addEventListener("click", function () {
@@ -41,6 +47,10 @@ document.querySelector(".pdf-btn").addEventListener("click", function () {
 });
 
 
+////////////////////////////////////////////////////////////////////////////////////
+
+// 프린트 기능
+
 document.querySelector(".printer-btn").addEventListener("click", function () {
   fetch("/generate_private_pdf")
   .then((response) => {
@@ -61,3 +71,68 @@ document.querySelector(".printer-btn").addEventListener("click", function () {
     console.error("Error generating PDF : ", error);
   })
 })
+
+
+////////////////////////////////////////////////////////////////////////////////////
+
+const searchInput = document.querySelector(".search-input");
+const searchButton = document.querySelector(".search-button");
+let contentIds = [];
+let currentIndex = 0;
+
+function performSearch() {
+  const searchTerm = searchInput.value.trim().toLowerCase();
+  if (searchTerm === "") return;
+
+  fetch(`/search?term=${encodeURIComponent(searchTerm)}`)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.length > 0) {
+        contentIds = data.map((item) => `${item}`);
+        console.log(contentIds);
+        loadNextContent();
+      } else {
+        console.log("검색 결과가 없습니다.");
+      }
+    })
+    .catch((error) => {
+      console.error("Error performing search:", error);
+    });
+}
+
+// 입력창에서 엔터 키 입력 이벤트 처리
+searchInput.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    performSearch();
+  } else if (event.key === "Escape") {
+    searchInput.value = ""; // 검색어를 초기화
+    currentIndex = 0;
+    contentIds = [];
+  }
+});
+
+// 검색 버튼 클릭 이벤트 처리
+searchButton.addEventListener("click", function () {
+  performSearch();
+});
+
+function loadNextContent() {
+  if (currentIndex >= contentIds.length) {
+    currentIndex = 0;
+  }
+
+  const content = contentIds[currentIndex].replace(".html", "");
+  const url = `/manual/${content}`;
+
+  fetch(url)
+    .then((response) => response.text())
+    .then((data) => {
+      $('.box-contents').html(data);
+    })
+    .catch((error) => {
+      console.error("Error loading content :", error);
+    });
+
+  currentIndex++;
+}

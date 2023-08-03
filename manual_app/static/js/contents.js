@@ -49,6 +49,6 @@ function handleLogoLinkClick(event) {
   window.location.href = "/"; // 홈 페이지로 이동
 }
 
-// "logoLink" 클릭 이벤트에 함수 연결
-const logoLink = document.querySelector("#home-link");
-logoLink.addEventListener("click", handleLogoLinkClick);
+// // "logoLink" 클릭 이벤트에 함수 연결
+// const logoLink = document.querySelector("#home-link");
+// logoLink.addEventListener("click", handleLogoLinkClick);
