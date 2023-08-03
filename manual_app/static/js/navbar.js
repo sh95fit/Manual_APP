@@ -382,7 +382,7 @@ function performSearch() {
     .then((data) => {
       if (data.length > 0) {
         contentIds = data.map((item) => `${item}`);
-        console.log(contentIds);
+        // console.log(contentIds);
         loadNextContent();
       } else {
         console.log("검색 결과가 없습니다.");
@@ -414,11 +414,6 @@ function loadNextContent() {
   // currentIndex++;
 }
 
-
-
-
-
-
 let searchIndex = 0;
 
 function findAndStoreSearchOccurrences() {
@@ -438,20 +433,19 @@ function findAndStoreSearchOccurrences() {
     occurrences.push(occurrence);
   }
 
-  console.log("검색어 위치와 개수:", occurrences);
-  console.log(occurrences.length);
-  console.log(occurrences[searchIndex].position);
-  console.log(searchIndex);
+  // console.log("검색어 위치와 개수:", occurrences);
+  // console.log(occurrences.length);
+  // console.log(occurrences[searchIndex].position);
+  // console.log(searchIndex);
 
   if (occurrences.length > 0) {
-    if (searchIndex <= occurrences.length)
-      scrollToPosition(occurrences[searchIndex].position);
-      if (searchIndex >= occurrences.length) {
-        currentIndex++;
-        searchIndex = 0;
-      } else {
-        searchIndex++;
-      }
+    scrollToPosition(occurrences[searchIndex].position);
+    if (searchIndex >= occurrences.length -1) {
+      currentIndex++;
+      searchIndex = 0;
+    } else {
+      searchIndex++;
+    }
   } else {
     searchIndex = -1;
   }
