@@ -110,15 +110,76 @@ function loadNextContent() {
   const content = contentIds[currentIndex].replace(".html", "");
   const url = `/manual/${content}`;
 
+  // fetch(url)
+  //   .then((response) => response.text())
+  //   .then((data) => {
+  //     $('.box-contents').html(data);
+
+  //     // // .search-input 요소에서 검색어를 가져온다.
+  //     // var searchText = $('.search-input').val().trim();
+
+  //     // // .box-contents 내의 모든 텍스트를 가져온다.
+  //     // var contentText = $('.box-contents').text();
+
+  //     // // 검색어를 감싸는 span 태그를 생성하여 내용을 변경한다.
+  //     // var updatedContent = contentText.replace(new RegExp('(' + searchText + ')', 'gi'), function(match, p1) {
+  //     //   console.log(p1);
+  //     //   return '<span class="highlight">' + p1 + '</span>';
+  //     // });
+
+  //     // console.log(updatedContent);
+  //     // // .box-contents 내용을 업데이트한다.
+  //     // $('.box-contents').html(updatedContent);
+
+  //     findAndStoreSearchOccurrences();
+  //   })
+  //   .catch((error) => {
+  //     console.error("Error loading content :", error);
+  //   });
+
   fetch(url)
-    .then((response) => response.text())
-    .then((data) => {
-      $('.box-contents').html(data);
-      findAndStoreSearchOccurrences();
-    })
-    .catch((error) => {
-      console.error("Error loading content :", error);
-    });
+  .then((response) => response.text())
+  .then((data) => {
+    // HTML 내용을 파싱하기 위해 임시 div 요소를 생성합니다.
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = data;
+
+    // .search-input 요소에서 검색어를 가져옵니다.
+    var searchText = $('.search-input').val().trim();
+
+    // DOM 노드를 재귀적으로 탐색하고 하이라이팅을 적용하는 함수를 정의합니다.
+    function highlightNode(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        var updatedContent = node.textContent.replace(new RegExp('(' + searchText + ')', 'gi'), function(match, p1) {
+          return '<span class="highlight">' + p1 + '</span>';
+        });
+
+        const wrapper = document.createElement("div");
+        wrapper.innerHTML = updatedContent;
+        while (wrapper.firstChild) {
+          node.parentNode.insertBefore(wrapper.firstChild, node);
+        }
+        node.parentNode.removeChild(node);
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        // 자식 요소들을 재귀적으로 처리합니다.
+        for (var i = 0; i < node.childNodes.length; i++) {
+          highlightNode(node.childNodes[i]);
+        }
+      }
+    }
+
+    // 임시 div로부터 하이라이팅 작업 시작합니다.
+    highlightNode(tempDiv);
+
+    // .box-contents 요소에 업데이트된 내용을 설정합니다.
+    $('.box-contents').html(tempDiv.innerHTML);
+
+    findAndStoreSearchOccurrences();
+  })
+  .catch((error) => {
+    console.error("컨텐츠를 불러오는 중 오류가 발생했습니다:", error);
+  });
+
 
   // currentIndex++;
 }
@@ -187,10 +248,10 @@ function scrollToPosition(position) {
   tempDiv.remove();
 }
 
-function applyHighlight(text, searchTerm) {
-  const searchRegex = new RegExp(searchTerm, "gi");
-  return text.replace(searchRegex, match => `<span class="highlight">${match}</span>`);
-}
+// function applyHighlight(text, searchTerm) {
+//   const searchRegex = new RegExp(searchTerm, "gi");
+//   return text.replace(searchRegex, match => `<span class="highlight">${match}</span>`);
+// }
 
 
 // 입력창에서 엔터 키 입력 이벤트 처리
@@ -209,3 +270,31 @@ searchInput.addEventListener("keydown", function (event) {
 searchButton.addEventListener("click", function () {
   performSearch();
 });
+
+
+
+//////////////////////////////////////////////////////////
+
+// $(document).ready(function() {
+//   // 검색어 입력란에서 엔터 키를 누르면
+//   $('.search-input').keydown(function(event) {
+//     if (event.keyCode === 13) {
+//       // 검색어를 가져온다.
+//       var searchText = $(this).val().trim();
+
+//       // .box-contents 내의 모든 텍스트를 가져온다.
+//       var contentText = $('.box-contents').text();
+
+//       // 검색어를 감싸는 span 태그를 생성하여 내용을 변경한다.
+//       var updatedContent = contentText.replace(new RegExp('(' + searchText + ')', 'gi'), function(match, p1) {
+//         console.log(p1)
+//         return '<span class="highlight">' + p1 + '</span>';
+//       });
+
+//       console.log(updatedContent);
+//       // .box-contents 내용을 업데이트한다.
+//       $('.box-contents').html(updatedContent);
+//     }
+//   });
+// });
+

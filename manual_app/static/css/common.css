@@ -77,3 +77,7 @@ button {
   border: none;
   cursor: pointer;
 }
+
+.highlight {
+  background-color: yellow; /* 원하는 배경색 지정 */
+}
