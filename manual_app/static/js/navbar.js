@@ -110,33 +110,6 @@ function loadNextContent() {
   const content = contentIds[currentIndex].replace(".html", "");
   const url = `/manual/${content}`;
 
-  // fetch(url)
-  //   .then((response) => response.text())
-  //   .then((data) => {
-  //     $('.box-contents').html(data);
-
-  //     // // .search-input 요소에서 검색어를 가져온다.
-  //     // var searchText = $('.search-input').val().trim();
-
-  //     // // .box-contents 내의 모든 텍스트를 가져온다.
-  //     // var contentText = $('.box-contents').text();
-
-  //     // // 검색어를 감싸는 span 태그를 생성하여 내용을 변경한다.
-  //     // var updatedContent = contentText.replace(new RegExp('(' + searchText + ')', 'gi'), function(match, p1) {
-  //     //   console.log(p1);
-  //     //   return '<span class="highlight">' + p1 + '</span>';
-  //     // });
-
-  //     // console.log(updatedContent);
-  //     // // .box-contents 내용을 업데이트한다.
-  //     // $('.box-contents').html(updatedContent);
-
-  //     findAndStoreSearchOccurrences();
-  //   })
-  //   .catch((error) => {
-  //     console.error("Error loading content :", error);
-  //   });
-
   fetch(url)
   .then((response) => response.text())
   .then((data) => {
@@ -170,6 +143,18 @@ function loadNextContent() {
 
     // 임시 div로부터 하이라이팅 작업 시작합니다.
     highlightNode(tempDiv);
+
+    // Find the link element that matches the current URL and set its parent li as active
+    const links = $('.parent-items > li > a');
+    const currentLink = links.filter(function() {
+      return $(this).attr('href') === url;
+    });
+    const clickedItem = currentLink.parent();
+    $('.parent-items > li.active > .child-items').hide();
+    $('.parent-items > li.active').removeClass('active');
+    clickedItem.addClass('active');
+    const childItems = clickedItem.find('.child-items');
+    childItems.show();
 
     // .box-contents 요소에 업데이트된 내용을 설정합니다.
     $('.box-contents').html(tempDiv.innerHTML);
