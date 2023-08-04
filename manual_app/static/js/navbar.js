@@ -94,7 +94,7 @@ function performSearch() {
         // console.log(contentIds);
         loadNextContent();
       } else {
-        console.log("검색 결과가 없습니다.");
+        alert("검색 결과가 없습니다.");
       }
     })
     .catch((error) => {
