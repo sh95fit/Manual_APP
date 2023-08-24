@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+    ma-nginx:
+        container_name: ma-nginx
+        image: nginx
+        restart: always
+        volumes:
+          - ./etc/nginx/default.conf:/etc/nginx/conf.d/default.conf
+          - masocket:/tmp
+        networks:
+          - manet
+        depends_on:
+          - manual-app
+        ports:
+          - 9015:9015
+    manual-app:
+        container_name: manual-app
+        image: manual-app
+        build: .
+        networks:
+          - manet
+        # ports:
+        #   - 9015:9015
+        volumes:
+          - ./:/var/www/manual-app
+          - masocket:/tmp
+        restart: always
+        environment:
+          - FLASK_APP=manual_app
+          - FLASK_DEBUG=False:-True
+        command: ['sh', './etc/docker-entrypoint.sh']
+
+networks:
+    manet:
+
+volumes:
+  masocket:
