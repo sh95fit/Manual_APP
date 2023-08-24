@@ -3,6 +3,12 @@ FROM python:3.11
 # root 권한
 # 유저 추가 (패스워드를 입력하지 않아도 되도록 설정 + 홈디렉토리 자동생성)
 RUN adduser --disabled-password python
+RUN apt-get update
+RUN apt-get install wget
+RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+RUN tar -xvf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+RUN cp wkhtmltox/bin/wkhtmltopdf /usr/bin/
+
 
 # 유저 전환 (root -> 생성 유저)
 USER python
