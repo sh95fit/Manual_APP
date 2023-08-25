@@ -43,7 +43,7 @@ def generate_pdf() :
       pdf_path = temp_file.name
 
   # config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
-  config = pdfkit.configuration(wkhtmltopdf='/var/www/manual_app/etc/wkhtmltopdf/bin/wkhtmltopdf.exe')
+  config = pdfkit.configuration(wkhtmltopdf='/usr/local/bin/wkhtmltopdf')
 
   pdfkit.from_string(page_sum, pdf_path, options=pdfkit_options, configuration=config)
 
