@@ -24,7 +24,6 @@ services:
         #   - 9015:9015
         volumes:
           - ./:/var/www/manual-app
-          - ./etc/wkhtmltopdf/:/etc/wkhtmltopdf
           - masocket:/tmp
         restart: always
         environment:

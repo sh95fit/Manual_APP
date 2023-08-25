@@ -4,9 +4,20 @@ FROM python:3.11
 # 유저 추가 (패스워드를 입력하지 않아도 되도록 설정 + 홈디렉토리 자동생성)
 RUN adduser --disabled-password python
 RUN apt-get update
-RUN apt-get install wget
+RUN apt-get upgrade
+RUN apt-get install -y wget
+
 RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
 RUN tar -xvf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+RUN wget http://archive.ubuntu.com/ubuntu/pool/main/libj/libjpeg-turbo/libjpeg-turbo8_2.0.3-0ubuntu1.20.04.3_amd64.deb
+RUN dpkg -i libjpeg-turbo8_2.0.3-0ubuntu1.20.04.3_amd64.deb
+RUN wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.0g-2ubuntu4_amd64.deb
+RUN dpkg -i libssl1.1_1.1.0g-2ubuntu4_amd64.deb
+
+# ENV DEBIAN_FRONTEND=noninteractive
+# RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
+# RUN apt-get update && apt-get install -y ./wkhtmltox_0.12.5-1.bionic_amd64.deb
+
 RUN cp wkhtmltox/bin/wkhtmltopdf /usr/bin/
 RUN chmod +x /usr/bin/wkhtmltopdf
 RUN chown python:python /usr/bin/wkhtmltopdf
