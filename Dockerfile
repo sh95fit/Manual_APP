@@ -6,21 +6,28 @@ RUN adduser --disabled-password python
 RUN apt-get update
 RUN apt-get upgrade
 RUN apt-get install -y wget
+RUN apt-get install -y xfonts-75dpi xfonts-base
 
-RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
-RUN tar -xvf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
-RUN wget http://archive.ubuntu.com/ubuntu/pool/main/libj/libjpeg-turbo/libjpeg-turbo8_2.0.3-0ubuntu1.20.04.3_amd64.deb
-RUN dpkg -i libjpeg-turbo8_2.0.3-0ubuntu1.20.04.3_amd64.deb
+
+# RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+# RUN tar -xvf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+RUN wget http://archive.ubuntu.com/ubuntu/pool/main/libj/libjpeg-turbo/libjpeg-turbo8_2.1.2-0ubuntu1_amd64.deb
+RUN dpkg -i libjpeg-turbo8_2.1.2-0ubuntu1_amd64.deb
 RUN wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.0g-2ubuntu4_amd64.deb
 RUN dpkg -i libssl1.1_1.1.0g-2ubuntu4_amd64.deb
 
-# ENV DEBIAN_FRONTEND=noninteractive
-# RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
-# RUN apt-get update && apt-get install -y ./wkhtmltox_0.12.5-1.bionic_amd64.deb
+# 프로젝트 소스 복사
+COPY --chown=python:python ./ /var/www/manual_app
 
-RUN cp wkhtmltox/bin/wkhtmltopdf /usr/bin/
-RUN chmod +x /usr/bin/wkhtmltopdf
-RUN chown python:python /usr/bin/wkhtmltopdf
+# 복사한 프로젝트 디렉토리로 이동
+WORKDIR /var/www/manual_app
+
+RUN dpkg -i ./etc/wkhtmltopdf/wkhtmltox_0.12.6.1-2.jammy_amd64.deb
+
+
+# RUN cp wkhtmltox/bin/wkhtmltopdf /usr/bin/
+RUN chmod +x /usr/local/bin/wkhtmltopdf
+RUN chown python:python /usr/local/bin/wkhtmltopdf
 
 # 유저 전환 (root -> 생성 유저)
 USER python
@@ -33,11 +40,11 @@ RUN python -m pip install --upgrade pip
 RUN pip install --user -r /tmp/requirements.txt
 RUN pip install --user gunicorn==20.1.0
 
-# 프로젝트 소스 복사
-COPY --chown=python:python ./ /var/www/manual_app
+# # 프로젝트 소스 복사
+# COPY --chown=python:python ./ /var/www/manual_app
 
-# 복사한 프로젝트 디렉토리로 이동
-WORKDIR /var/www/manual_app
+# # 복사한 프로젝트 디렉토리로 이동
+# WORKDIR /var/www/manual_app
 
 # 설치한 패키지 명령어를 사용하기 위해 환경변수 등록
 ENV PATH="/home/python/.local/bin:${PATH}"
