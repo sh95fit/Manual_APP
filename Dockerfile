@@ -2,10 +2,12 @@ FROM python:3.11
 
 # root 권한
 # 유저 추가 (패스워드를 입력하지 않아도 되도록 설정 + 홈디렉토리 자동생성)
-RUN adduser --disabled-password python
+RUN adduser --disabled-password --gecos '' python
 RUN apt-get update
-RUN apt-get upgrade
+# RUN apt-get upgrade
 RUN apt-get install -y wget
+RUN apt-get install -y certbot python3-certbot-nginx
+RUN apt-get install -y cron
 
 # wkhtmltopdf 의존성 패키지 설치
 RUN apt-get install -y xfonts-75dpi xfonts-base
@@ -40,6 +42,19 @@ RUN dpkg -i ./etc/wkhtmltopdf/wkhtmltox_0.12.6.1-2.jammy_amd64.deb
 RUN chmod +x /usr/local/bin/wkhtmltopdf
 RUN chown python:python /usr/local/bin/wkhtmltopdf
 
+COPY ./etc/letsencrypt/sh/init-cert.sh /usr/bin
+COPY ./etc/letsencrypt/sh/renew-cert.sh /usr/bin
+RUN chmod +x /usr/bin/init-cert.sh
+RUN chmod +x /usr/bin/renew-cert.sh
+RUN chown python:python /usr/bin/init-cert.sh
+RUN chown python:python /usr/bin/renew-cert.sh
+RUN chown python:python /etc/cron.d/certbot
+RUN chown python:python /var/www
+
+
+RUN chown -R python:python /var/lib/nginx
+RUN chown -R python:python /var/log/nginx
+RUN chown -R python:python /run
 
 
 # 유저 전환 (root -> 생성 유저)
@@ -61,6 +76,9 @@ RUN chmod +x ./etc/docker-entrypoint.sh
 
 # 9015 포트 노출
 EXPOSE 9015
-
+EXPOSE 443
 # gunicorn 실행 (etc/docker-entrypoint.sh로 명령어를 한번에 실행)
 # CMD gunicorn --bind :9015 --workers 2 --threads 8 'manual_app:create_app()'
+
+# 시작 시 실행할 명령 설정
+CMD ["sh", "/usr/bin/init-cert.sh"]
