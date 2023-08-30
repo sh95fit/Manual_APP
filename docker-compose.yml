@@ -4,11 +4,14 @@ services:
     ma-nginx:
         container_name: ma-nginx
         image: nginx
+        build:
+          context: .
+          dockerfile: ./nginx/Dockerfile
         restart: always
         volumes:
           # - /etc/letsencrypt:/etc/letsencrypt
           - ./etc/nginx/conf.d:/etc/nginx/conf.d
-          # - ./certbot/conf:/etc/letsencrypt
+          - ./certbot/conf:/var/lib/letsencrypt
           # - ./certbot/data:/usr/share/nginx/html/letsencrypt
           # - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf
           - masocket:/tmp
@@ -17,6 +20,7 @@ services:
         depends_on:
           - manual-app
         ports:
+          - 80:80
           - 9015:9015
           - 443:443
         # command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
