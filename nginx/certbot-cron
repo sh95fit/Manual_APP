@@ -1,3 +1,2 @@
 # certbot-cron
-
-0 1 * * * /usr/local/bin/init-certbot.sh >> /var/log/certbot.log 2>&1 && nginx -s reload
+0 1 1 * * rm -f /var/www/html/init-certbot.lock && /var/www/html/init-certbot.sh

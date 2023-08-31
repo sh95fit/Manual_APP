@@ -1,5 +1,8 @@
 FROM python:3.11
 
+# 시간대 환경 변수 설정
+ENV TZ=Asia/Seoul
+
 # root 권한
 # 유저 추가 (패스워드를 입력하지 않아도 되도록 설정 + 홈디렉토리 자동생성)
 RUN adduser --disabled-password --gecos '' python
