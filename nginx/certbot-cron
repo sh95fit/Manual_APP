@@ -1,2 +1,3 @@
 # certbot-cron
 0 0 1 */14 * rm -f /var/www/html/init-certbot.lock && /var/www/html/init-certbot.sh
+#0 1 * * 2 certbot renew
