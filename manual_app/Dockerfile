@@ -60,6 +60,6 @@ RUN chmod +x ./etc/docker-entrypoint.sh
 
 # 9015 포트 노출
 EXPOSE 9015
-EXPOSE 443
+
 # gunicorn 실행 (etc/docker-entrypoint.sh로 명령어를 한번에 실행)
 # CMD gunicorn --bind :9015 --workers 2 --threads 8 'manual_app:create_app()'

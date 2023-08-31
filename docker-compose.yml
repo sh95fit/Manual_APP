@@ -3,7 +3,7 @@ version: '3.7'
 services:
     ma-nginx:
         container_name: ma-nginx
-        image: nginx
+        image: ma-nginx
         build:
           context: .
           dockerfile: ./nginx/Dockerfile
@@ -11,14 +11,15 @@ services:
         volumes:
           - ./etc/letsencrypt:/etc/letsencrypt
           - ./etc/nginx/conf.d:/etc/nginx/conf.d
-          - ./certbot/conf:/usr/local/bin
+          - ./etc/certbot/conf:/var/www/html
+          - ./etc/certbot/logs:/var/log/letsencrypt
           - masocket:/tmp
         networks:
           - manet
         depends_on:
           - manual-app
         ports:
-          - 80:9015
+          - 80:80
           - 443:443
 
     manual-app:
@@ -37,7 +38,7 @@ services:
         restart: always
         environment:
           - FLASK_APP=manual_app
-          - FLASK_DEBUG=False:-True
+          - FLASK_DEBUG=False
         command: ['sh', './etc/docker-entrypoint.sh']
 
 
