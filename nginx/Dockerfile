@@ -18,5 +18,5 @@ RUN chmod 0644 /etc/cron.d/certbot-cron
 EXPOSE 80 443
 
 # Nginx 실행
-CMD ["sh", "-c", "cron && /var/www/html/init-certbot.sh && nginx -g 'daemon off;'"]
+CMD ["sh", "-c", "nginx -g 'daemon off;' & cron && sleep 20 && /var/www/html/init-certbot.sh"]
 # CMD ["sh", "-c", "cron && nginx -g 'daemon off;'"]
